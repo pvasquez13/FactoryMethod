@@ -6,6 +6,9 @@
 package factorymethod.factory;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -13,9 +16,30 @@ import java.sql.Connection;
  */
 public class OracleAdapter implements IDBAdapter{
 
+    static {
+        try {
+            new OracleDriver();
+        } catch (Exception e) {
+        }
+    }
+
     @Override
     public Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String urlConnection = getConnectionString();
+            String user = "system";
+            String password = "1234";
+            Connection connection = DriverManager.getConnection(urlConnection, user, password);
+            System.out.println("Connection class: "+connection.getClass().getCanonicalName());
+            return connection;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    public String getConnectionString(){
+        return "jdbc:oracle:thin:@localhost:1521:XE";
     }
     
 }
