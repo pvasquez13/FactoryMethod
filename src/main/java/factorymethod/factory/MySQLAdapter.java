@@ -8,9 +8,6 @@ package factorymethod.factory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -30,7 +27,7 @@ public class MySQLAdapter implements IDBAdapter{
         try {
             String urlConnection = getConnectionString();
             String user = "root";
-            String password = "1234";
+            String password = "mysqlroot";
             Connection connection = DriverManager.getConnection(urlConnection, user, password);
             System.out.println("Connection class: "+connection.getClass().getCanonicalName());
             return connection;
@@ -41,7 +38,8 @@ public class MySQLAdapter implements IDBAdapter{
     }
     
     public String getConnectionString(){
-        return "jdbc:mysql://localhost:3306/patterns?zeroDateTimeBehavior=conertToNull";
+        return "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//        return "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull";
     }
     
 }
