@@ -1,6 +1,6 @@
 
-import factorymethod.factory.MySQLAdapter;
-import factorymethod.factory.OracleAdapter;
+import factorymethod.factory.DBAdapterFactory;
+import factorymethod.factory.IDBAdapter;
 import java.sql.Connection;
 
 /**
@@ -9,7 +9,9 @@ import java.sql.Connection;
  */
 public class Main {
     public static void main(String[] args) {
-        MySQLAdapter adapter = new MySQLAdapter();
+//        MySQLAdapter adapter = new MySQLAdapter();
+
+        IDBAdapter adapter = DBAdapterFactory.getAdapter();
         Connection connection = adapter.getConnection();
     }
     
